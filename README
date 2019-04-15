@@ -8,6 +8,8 @@ See INSTALL for directions for compiling and running BiRelCost and its test fram
 
 See NOTES for detailed notes on notation, troubleshooting and misc.
 
+This software uses why3 0.87.3 and alt-ergo 1.30.
+
 What is where?
 -----------------------------
 - all the OCaml source is in src/
