@@ -1,0 +1,72 @@
+
+
+	let lt = {contra: (U ((int X int) [max,1]-> bool, (int X int) [min,1]-> bool)), 0} in
+let sel = {fix select (x). Lam. Lam. lam l. caseL l of 
+   nil   => pack (x, nil)
+ | h::tl => let r = {if (lt (x, h)) then (x,h) else (h,x) : U (int X int), 0} in
+   	    let r'' = select (fst r) [] [] tl in
+	    unpack r'' as r' in
+	    pack (fst r', (snd r)::(snd r'))
+
+: 
+((U int) =>forall i; alpha. 
+(list [i, alpha] U int)  => exists beta :: size. ((U int) X (list [i,beta] U int))), 0} in
+
+
+let ssort = { fix ssort(_). Lam. Lam. lam l. caseL l of 
+   nil   =>  pack nil
+ | h::tl => let rpair = sel h [] [] tl in
+   	    unpack rpair as y in
+   	    let rlist = ssort () [] [] (snd y) in
+	    unpack rlist as r' in
+	    pack ((fst y) :: r')
+ :  (unitR =>forall i; alpha.
+(list [i, alpha] U int)  => exists beta :: size. list [i,beta] U int ), 0 } in 
+
+
+
+let rev = { fix rev(z). Lam. Lam. Lam. Lam. lam l. lam acc.
+ caseL l of 
+   nil =>  acc
+ | h::tl => rev () [] [] [] [] tl (h :: acc)
+ :  (unitR  =>  forall i; alpha; j; beta. 
+(list [i, alpha] U int) => (list [j, beta] U int) => list[i+j, alpha+beta] U int) , 0 } in 
+
+
+let incr = {contra: intR => intR, 0} in
+
+let length = { fix length(z). Lam. Lam. lam l. caseL l of 
+   nil => 0
+ | h::tl => incr (length () [] [] tl)
+ : unitR => forall i; alpha.  (list[i,alpha] U int) => intR , 0 } in
+
+let append = {fix append (z). Lam. Lam. Lam. Lam. lam x. lam y.
+caseL x of
+   nil  => y
+|  h :: tl => h :: append () [] [] [] [] tl y
+
+ : unitR  =>  forall i; alpha; j; beta. 
+(list [i, alpha] U int) => (list [j, beta] U int) => list[i+j, alpha+beta] U int , 0 } in 
+
+let map = { Lam. fix map(f). Lam. Lam. lam l. caseL l of 
+   nil =>  nil
+ | h::tl => f h :: map f [] [] tl
+ : forall k. ((B ((U int) [diff, k] -> U int)) => forall i; alpha.  (list[i,alpha] U int) [diff,  k * alpha] -> list[i,alpha] U int) , 0 } in 
+ 
+fix sort(z).  Lam. Lam. lam l.
+	let l1 =  ssort () [] [] l in
+	unpack l1 as l2 in 
+	let l3 =  rev () [] [] [] [] l2 nil in
+	let l4 = ssort () [] [] l3 in
+	unpack l4 as l5 in
+	let len = length () [] [] l5 in
+	let l6 =  append () [] [] [] [] l5 l2 in
+	let l7 = ssort () [] [] l6 in
+	unpack l7 as l8 in 
+	let l9 = rev () [] [] [] [] l8 nil in
+	l7
+
+ <= 0 : unitR =>forall i; alpha.
+(list [i, alpha] U int)  => exists beta :: size. list [2*i,beta] U int
+
+

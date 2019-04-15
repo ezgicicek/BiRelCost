@@ -1,0 +1,11 @@
+fix merge (z). lam f. Lam. Lam. lam x. lam y.
+    caseL x of
+      nil     => y
+    | b :: bs => caseL y of
+      	      	      nil    => x
+    		  |  c :: cs => if (f (b,c))
+		       	        then  b :: merge () f [] [] bs y 
+				else  c :: merge () f [] [] x cs
+<= [min, 0] : unit [min,0]-> ( (int X int) [min,0]-> bool) [min,0]-> forall n [min, 0] :: size. forall m [min, 0] :: size.
+(list [n] int) [min,0]-> (list[m] int) [min,  5*(min(n,m))] -> list [n+m] int
+

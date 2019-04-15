@@ -1,0 +1,12 @@
+fix bsplit(z). Lam. lam l. caseL l of 
+   nil => pack (nil, nil)
+ | h::tl => caseL tl of
+   	    nil => pack (h::nil, nil)
+	  | h'::tl' => let r = bsplit () [] tl' in
+	               unpack r as x in
+	    	       pack (h :: fst x, h' :: snd x)	    
+
+<= [max, 0] : unit  [max, 0]->  
+forall i [max, 0] :: size. 
+(list [i] bool) [max,  i] -> exists j :: size. (list[j] bool) X (list [i-j] bool)
+

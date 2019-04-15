@@ -1,0 +1,3 @@
+lam x. (x true)
+
+<= 0 : (bool [max, 0] -> bool) [max,1] -> bool

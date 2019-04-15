@@ -1,0 +1,15 @@
+let bsplit = { contra : unit  [max, 0]->  
+forall i [max, 0] :: size. 
+(list [i] int) [max,  i] ->  (list[cl(i/2)] int) X (list [fl(i/2)] int) , 0}
+in
+fix bfold(z). lam f. Lam. lam l. caseL l of 
+   nil   => 0
+ | h::tl => caseL tl of 
+   	    nil     => h
+	  | h'::tl' => let x = bsplit () [] l in
+	  	       f (bfold () f [] (fst x), bfold () f []  (snd x))	    
+
+<= [max, 0] : unit  [max, 0]-> ((int X int) [max,0] -> int) [max,0] ->
+forall i [max, 0] :: size.
+(list [i] int) [max,  sum(minpowlin (i,i), {0, cl(log (i))})] -> int
+

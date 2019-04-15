@@ -1,0 +1,7 @@
+fix map(f). Lam.  lam l. caseL l of 
+   nil =>  nil
+ | h::tl => f h :: map (f) [] tl
+
+<= [max, 0] : (int [max, 2] -> bool) [max,0] -> forall i [max, 0] :: size. (list [i] int)
+ [max, 6 * i] -> list[i] bool
+

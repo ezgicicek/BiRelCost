@@ -1,0 +1,9 @@
+fix id(z). Lam. Lam. lam l. caseL l of 
+   nil =>  nil
+ | h::tl => h :: id () [] [] tl,
+
+fix id(z). Lam. Lam. lam l. caseL l of 
+   nil =>  nil
+ | h::tl => h :: id () [] [] tl
+
+<= 0 : unitR [diff, 0]-> forall i [diff, 0] :: size. forall alpha [diff, 0] :: size.  (list[i,alpha] U bool) [diff, 0] -> list[i,alpha] U bool

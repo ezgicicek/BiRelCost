@@ -1,0 +1,16 @@
+let bsplit = { contra : unit  [max, 0]->  
+forall i [max, 0] :: size. 
+(list [i] int) [max,  i] -> exists j :: size. (list[j] int) X (list [i-j] int) , 0}
+in
+fix bfold(z). lam f. Lam. lam l. caseL l of 
+   nil => 0
+ | h::tl => caseL tl of 
+   	    nil => h
+	  | h'::tl' => let r = bsplit () [] tl' in
+	  	       unpack r as x in
+	  	       f (bfold () f [] (fst x), bfold () f []  (snd x))	    
+
+<= 0 : unit  [max, 0]-> ((int X int) [max,0] -> int) [max,0] ->
+forall i [max, 0] :: size. 
+(list [i] int) [max,  i] -> int
+

@@ -1,0 +1,13 @@
+fix sam (z). Lam. Lam. lam eq. lam mul. lam x. 
+caseL x of
+   nil     => contra
+|  h :: tl => caseL tl of
+     	     nil       => if (eq (z, 0)) then 1 else z
+	   | h' :: tl'   => let r = sam z [] [] eq mul tl in
+                            let p = (eq (h, 0)) in
+                            if p then mul (z, mul(r,r)) else mul(r,r)
+
+<= 0 :  ( intR  =>  forall i; alpha. 
+ (B (U ((int X int) [max, 1]-> bool, (int X int) [min, 1]-> bool))) => (B (U ((int X int) [max,1]-> int, (int X int) [min,1]-> int))) =>
+(list [i, alpha] U int) [diff, (2 * alpha) ]-> U int)
+

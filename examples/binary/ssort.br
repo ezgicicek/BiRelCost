@@ -1,0 +1,26 @@
+let lt = {contra: (U ((int X int) [max,1]-> bool, (int X int) [min,1]-> bool)), 0} in
+let sel = {fix select (x). Lam. Lam. lam l. caseL l of 
+   nil   => pack (x, nil)
+ | h::tl => let r = {if (lt (x, h)) then (x,h) else (h,x) : U (int X int), 0} in
+   	    let r'' = select (fst r) [] [] tl in
+	    unpack r'' as r' in
+	    pack (fst r', (snd r)::(snd r'))
+
+: 
+((U int) =>
+forall i; alpha.
+(list [i, alpha] U int)  => exists beta :: size. ((U int) X (list [i,beta] U int))), 0} in
+
+fix ssort(_). Lam. Lam. lam l. caseL l of 
+   nil   =>  pack nil
+ | h::tl => let rpair = sel h [] [] tl in
+   	    unpack rpair as y in
+   	    let rlist = ssort () [] [] (snd y) in
+	    unpack rlist as r' in
+	    pack ((fst y) :: r')
+
+<= 0 : 
+unitR
+ =>
+forall i; alpha.
+(list [i, alpha] U int)  => exists beta :: size. list [i,beta] U int

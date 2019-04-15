@@ -1,0 +1,26 @@
+let leq = {contra: (int X int) -> bool, 0} in
+fix merge (z). Lam. Lam. lam x. lam y.
+    caseL x of
+      nil     => y
+    | b :: bs => caseL y of
+      	      	      nil    => x
+    		  |  c :: cs => if (leq (b,c))
+		       	        then  b :: merge () [] [] bs y 
+				else  c :: merge () [] [] x cs
+,
+let leq ={contra: (int X int) [min,0]-> bool, 0} in
+fix merge (z). Lam. Lam. lam x. lam y.
+    caseL x of
+      nil     => y
+    | b :: bs => caseL y of
+      	      	      nil    => x
+    		  |  c :: cs => if (leq (b,c))
+		       	        then  b :: merge () [] [] bs y 
+				else  c :: merge () [] [] x cs
+<= 0 :
+
+U (unit -> forall n [max, 0] :: size. forall m [max, 0] :: size.
+(list [n] int) -> (list[m] int) [max,  4*(n+m)] -> list [n+m] int, 
+   unit [min,0]-> forall n [min, 0] :: size. forall m [min, 0] :: size.
+(list [n] int) [min,0]-> (list[m] int) [min,  4*(min(n,m))] -> list [n+m] int)
+

@@ -1,0 +1,8 @@
+let x = true in fix f(x).
+     if x then 1
+     	   else (case true of 
+ 	   	      inl(x) => { inl x : forall t [diff, 0]:: size. exists p:: cost. boolR [diff, p]->  list[5 + t, inf] intR, inf}
+	 	    | inr(y) => snd (nil::())  )
+
+
+<= 4 : int

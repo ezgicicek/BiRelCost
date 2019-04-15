@@ -1,0 +1,7 @@
+fix find(x). lam eq. Lam. lam l. caseL l of 
+   nil =>  0
+ | h::tl => if (eq (h, x)) then 1 else find x eq [] tl
+
+<= [max,0] :
+int -> ((int X int) [max,1]-> bool) -> forall n [max, 0] :: size.
+(list [n] int)  [max,  5*n] -> int

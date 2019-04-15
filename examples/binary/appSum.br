@@ -1,0 +1,17 @@
+let f = {contra : B(U ((int X int) [max,1]-> int, (int X int) [min,1]-> int)), 0} in
+
+fix approxSum(acc). Lam. Lam. lam l. caseL l of 
+   nil => acc
+ | h::tl => caseL tl of
+   	    nil => f (h, acc)
+	  | h'::tl' => approxSum (f(f(h,acc), h')) [] [] tl'
+,
+
+let f = {contra : B(U ((int X int) [max,1]-> int, (int X int) [min,1]-> int)), 0} in
+fix approxSum(acc). Lam. Lam. lam l. caseL l of 
+   nil => acc
+ | h::tl => caseL tl of
+   	    nil => f (h, acc)
+	  | h'::tl' => approxSum (f(h,acc)) [] [] tl'
+
+<= 0 : (U int) =>  forall i; alpha. (list [i, alpha] U int) [diff, i]-> U int 

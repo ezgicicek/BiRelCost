@@ -1,0 +1,15 @@
+fix append (z). Lam. Lam. Lam. Lam. lam x. lam y.
+caseL x of
+   nil     => y
+|  h :: tl => h :: append () [] [] [] [] tl y
+,
+fix append (z). Lam. Lam. Lam. Lam. lam x. lam y.
+caseL x of
+   nil     => y
+|  h :: tl => h :: append () [] [] [] [] tl y
+
+
+<= 0 : unitR  =>  
+forall i; alpha; j; beta. 
+(list [i, alpha] U bool) => (list [j, beta] U bool) => list[i+j, alpha+beta] U bool
+

@@ -1,0 +1,15 @@
+fix bsplit(z). Lam. Lam. lam l. caseL l of 
+   nil => pack (nil, nil)
+ | h::tl => caseL tl of
+   	    nil => pack (h::nil, nil)
+	  | h'::tl' => let r = bsplit () [] [] tl' in
+	               unpack r as r' in
+	               clet r' as x in
+	    	       pack (h :: fst x, h' :: snd x)
+
+<= 0 : 
+( unitR =>  
+forall i; alpha. 
+(list [i, alpha] U int) => exists beta :: size. { beta <= alpha }
+ (list[cl(i / 2), beta] U int) X (list [fl(i / 2), alpha-beta] U int)
+) 

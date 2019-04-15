@@ -1,0 +1,16 @@
+let app = {contra
+ : unitR  =>  
+forall i; alpha; j; beta. 
+(list [i, alpha] U bool) => (list [j, beta] U bool) => list[i+j, i+j] U bool, 0} in
+
+
+
+fix flatten (z). Lam. Lam. Lam. Lam. lam M.
+caseL M of
+   nil     => nil
+|  l :: rM => let r = flatten () [] [] [] [] rM in
+     	      app () [] [] [] [] l r
+
+<= 0 : unitR  =>  
+forall i; alpha; j; beta. 
+(list [i, alpha] (list [j, beta] U bool)) => list[i*j, i * j] U bool

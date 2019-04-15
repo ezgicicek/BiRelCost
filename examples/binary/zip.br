@@ -1,0 +1,11 @@
+fix zip(f). Lam. Lam. Lam. lam x. caseL (fst x) of 
+   nil => nil
+ | h::tl => caseL (snd x) of
+   	    nil => contra
+	  | h'::tl' => let rest = zip f [] [] [] (tl, tl') in
+	    	       let fh = f (h,h') in fh :: rest
+
+<= 0 : 
+(B (U ((int X bool) [max, 1]-> int, (int X bool) [min, 1]-> int)) )=>  
+forall i; alpha; beta. 
+((list [i, alpha] U int) X (list[i,beta] U bool)) [diff, 0] -> list[i, min(i, alpha+beta)] (U int)

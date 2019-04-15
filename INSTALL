@@ -1,0 +1,72 @@
+Ho to install BiRelCost
+-----------------------
+
+Dependencies:
+-----------------------
+
+1. Install OCaml >= 4.02 plus ocamlfind, ocamlbuild and menhir
+
+2. Install Why3 0.87+  ocaml libs from:
+
+   - http://why3.lri.fr/
+
+   Basically you want to go to Why3 source and do:
+
+   $ make
+   $ sudo make install
+   $ make byte opt
+   $ sudo make install-lib
+
+   The last two steps are important to make Ocaml recognize Why3 as a
+   library (Do not skip)
+
+3. Install Alt-ergo >= 0.99:
+
+   -http://alt-ergo.ocamlpro.com/
+
+   [Available through APT]
+
+4. Make sure Alt-ergo is registered as a prover for Why3
+   
+   $ why3config --detect
+
+   you should get something like:
+
+   Found prover Alt-Ergo version 0.99
+
+
+How to typecheck a program in BiRelCost:
+-----------------------
+
+
+1. Compile BiRelCost
+
+   $ make
+
+2. Run example programs (located in examples/* where * is in {unary,binary})
+   -------------------------------
+   For all the programs except bfold and msort
+
+   $ ./birel examples/binary/map.br
+
+   For  bfold and msort (activate nochange heuristic)
+
+   $ ./birel -NC  examples/binary/msort.br
+   
+
+How to run benchmarks in BiRelCost:
+-----------------------
+
+1. Get oUnit
+   http://ounit.forge.ocamlcore.org
+
+2. Compile BiRelCost Test framework
+
+   $ make test   
+
+3. Run benchmarks
+   
+   $./test.byte
+
+
+

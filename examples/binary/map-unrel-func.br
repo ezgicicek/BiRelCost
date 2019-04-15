@@ -1,0 +1,6 @@
+Lam. fix map(z). Lam. Lam. lam f. lam l. caseL l of 
+   nil =>  nil
+ | h::tl => f h :: map () [] [] f tl
+
+<= 0 : forall k.  (unitR => forall i; alpha. 
+(B ( U(int [max, 2 * k] -> bool, int [min, k]-> bool))) => (list[i,alpha] U int) [diff, k *  alpha] -> list[i,alpha] U bool)

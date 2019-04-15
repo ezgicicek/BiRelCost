@@ -1,0 +1,81 @@
+let bsplit = 
+{fix bsplit(z). Lam. Lam. lam l. caseL l of 
+   nil => pack (nil, nil)
+ | h::tl => caseL tl of
+   	    nil => pack (h::nil, nil)
+	  | h'::tl' => let r = bsplit () [] [] tl' in
+	               unpack r as r' in
+	               clet r' as x in
+	    	       pack (h :: fst x, h' :: snd x) : B (unitR =>  
+forall i; alpha. 
+(list [i, alpha] U int) => exists beta :: size. { beta <= alpha }
+ (list[cl(i / 2), beta] U int) X (list [fl(i / 2), alpha-beta] U int)), 0} in
+
+
+
+
+let merge  = {contra :
+ B(U (unit -> ( (int X int) -> bool) -> forall n [max, 0] :: size. forall m [max, 0] :: size.
+(list [n] int) -> (list[m] int) [max,  5*(n+m)] -> list [n+m] int, 
+   unit [min,0]-> ( (int X int) [min,0]-> bool) [min,0]-> forall n [min, 0] :: size. forall m [min, 0] :: size.
+(list [n] int) [min,0]-> (list[m] int) [min,  5*(min(n,m))] -> list [n+m] int))
+ , 0} in
+let leq={contra: B (U ((int X int) [max,0]-> bool, (int X int) [min,0]-> bool)),0} in
+
+let msort = { fix msort(z). lam f. Lam. Lam. lam l. caseL l of 
+   nil   => nil
+ | h::tl => caseL tl of 
+   	    nil     => h::nil
+	  | h'::tl' => let r = bsplit () [] [] l in
+	    	       unpack r as y in
+		       clet y as x in
+		       let r1 = (msort () f [] [] (fst x)) in
+		       let r2 = (msort () f [] [] (snd x)) in
+	  	       merge () f [] [] r1 r2  :
+B (unitR => (B (U ((int X int) [max,0]-> bool, (int X int) [min,0]-> bool))) => forall i; alpha.(list [i, alpha] U int) [diff, sum(minpowlin (alpha, i), {0, cl(log (i))})] -> U (list [i] int)), 0 } in
+	
+	
+	let lt = {contra: B(U ((int X int) [max,1]-> bool, (int X int) [min,1]-> bool)), 0} in
+let sel = {fix select (x). Lam. Lam. lam l. caseL l of 
+   nil   => pack (x, nil)
+ | h::tl => let r = {if (lt (x, h)) then (x,h) else (h,x) : U (int X int), 0} in
+   	    let r'' = select (fst r) [] [] tl in
+	    unpack r'' as r' in
+	    pack (fst r', (snd r)::(snd r'))
+
+: 
+B((U int) =>forall i; alpha. 
+(list [i, alpha] U int)  => exists beta :: size. ((U int) X (list [i,beta] U int))), 0} in
+
+
+let ssort1 = { fix ssort1(_). Lam. Lam. lam l. caseL l of 
+   nil   =>  pack nil
+ | h::tl => let rpair = sel h [] [] tl in
+   	    unpack rpair as y in
+   	    let rlist = ssort1 () [] [] (snd y) in
+	    unpack rlist as r' in
+	    pack ((fst y) :: r')
+ : B (unitR =>forall i; alpha.
+(list [i, alpha] U int)  => exists beta :: size. list [i,beta] U int) , 0 } in 
+
+let rev = { fix rev(z). Lam. Lam. Lam. Lam. lam l. lam acc.
+ caseL l of 
+   nil =>  acc
+ | h::tl => rev () [] [] [] [] tl (h :: acc)
+ : B (unitR  =>  forall i; alpha; j; beta. 
+(list [i, alpha] U int) => (list [j, beta] U int) => list[i+j, alpha+beta] U int) , 0 } in 
+ 
+fix sort(z). lam f. Lam. Lam. lam l.
+	let l1 =  ssort1 () [] [] l in
+	unpack l1 as l2 in 
+	let l3 =  rev () [] [] [] [] l2 nil in
+	let l4 = ssort1 () [] [] l3 in
+	unpack l4 as l5 in
+	let l6 =  rev () [] [] [] [] l5 nil in
+ 	let l7 =  msort () f [] [] l in
+ 	let l8 = msort () f  [] [] l in
+ 	let l9 = msort () f  [] [] l in
+ 	l7
+
+<= 0 : B (unitR => (B (U ((int X int) [max,0]-> bool, (int X int) [min,0]-> bool))) => forall i; alpha.(list [i, alpha] U int) [diff, 3* sum(minpowlin (alpha, i), {0, cl(log (i))})] -> U (list [i] int))
+

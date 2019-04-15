@@ -1,0 +1,91 @@
+	(** {Sum: a copy of Why3'S Sum instantiated for reals} *)
+
+theory Sum
+
+  use import real.Real
+  use HighOrd
+
+  function sum (a b: real) (f: real -> real) : real
+  (** sum of [f n] for [a <= n <= b] *)
+
+  axiom sum_def1:
+    forall f: real -> real, a b: real.
+    b < a -> sum a b f = 0.0
+
+  axiom sum_def2:
+    forall f: real -> real, a b: real.
+    a <= b -> sum a b f = sum a (b - 1.0) f + f b
+
+  axiom sum_left:
+    forall f: real -> real, a b: real.
+    a <= b -> sum a b f = f a + sum (a + 1.0) b f
+
+  axiom sum_ext:
+    forall f g: real -> real, a b: real.
+    (forall i. a <= i <= b -> f i = g i) ->
+    sum a b f = sum a b g
+
+  axiom sum_le:
+    forall f g: real -> real, a b: real.
+    (forall i. a <= i <= b -> f i <= g i) ->
+    sum a b f <= sum a b g
+
+  axiom sum_nonneg:
+    forall f: real -> real, a b: real.
+    (forall i. a <= i <= b -> 0.0 <= f i) ->
+    0.0 <= sum a b f
+
+  axiom sum_decomp:
+    forall f: real -> real, a b c: real. a <= b <= c ->
+    sum a c f = sum a b f + sum (b+1.0) c f
+
+end
+
+theory Birel
+  use import Sum
+  use import real.Real
+  use import bool.Bool
+  use import real.ExpLog
+  use import real.MinMax
+  use import real.PowerReal
+  use import real.Truncate
+  use import real.FromInt
+
+ function fl (x: real) : real =
+    from_int (floor x)
+
+   function cl (x: real) : real =
+   from_int (ceil x)
+
+   function fromInt (x: int) : real =
+   from_int x
+
+   constant min_pow :  real -> real -> (real -> real) -> real -> real = \x: real. \y:real. \f:real->real. \i: real.  (f (pow 2.0 i)) * (min x (pow 2.0  (cl(log2 y) - i)))
+
+   constant lin_f : real -> real =  \f:real.  5.0 * cl(f/2.0)
+
+   constant con_f : real -> real =  \f:real.  1.0
+
+   lemma fl_succ : forall n: real. (1.000 + (fl n)) = fl (1.000 + n)
+   lemma cl_succ : forall n: real. (1.000 + (cl n)) = cl (1.000 + n)
+
+
+  axiom nonzero : forall a n : real, f: real -> real.  0.0 <= n /\ 0.0 <= a ->  0.0  <= (sum 0.0 (cl (log2 n)) (min_pow a n f) )
+
+  axiom bsplit_func : forall a b n  : real, f: real -> real. 1.0 <= n /\ 0.0 <= b /\  b <= a /\ 1.0 <= a ->
+     (f n) +
+     ( (sum 0.000 (cl (log2 (cl (n / 2.000)))) (((min_pow b) (cl (n / 2.000)))  f)) +
+
+       (sum 0.000 (cl (log2 (fl (n / 2.000)))) (((min_pow (a-b)) (fl (n / 2.000))) f))) <=
+
+       sum 0.000 (cl (log2 n)) (((min_pow a) n) f)
+
+  (* This lemma is necessary for bsplit/bfold types (due to real domain), not for costs *)
+   lemma cl_fl_sum_real: forall n: real. fl(n) = cl (n) ->  ((fl (n / 2.0)) + (cl (n / 2.0))) = n
+
+
+
+ 
+end
+
+

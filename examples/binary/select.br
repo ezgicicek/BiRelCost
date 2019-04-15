@@ -1,0 +1,11 @@
+fix select (x). lam f. Lam. Lam. lam l. caseL l of 
+   nil   => pack (x, nil)
+ | h::tl => let r = {if (f x) then (x,h) else (h,x) : U (int X int), 0} in
+   	    let r'' = select (fst r) f [] [] tl in
+	    unpack r'' as r' in
+	    pack (fst r', h::(snd r'))
+
+<= 0 : 
+B ((U int) => (U (int [max,1]-> bool, int [min,1]-> bool)) =>
+forall i; alpha.
+(list [i, alpha] U int)  => exists beta :: size. ((U int) X (list [i,beta] U int)))

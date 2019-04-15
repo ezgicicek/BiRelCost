@@ -1,0 +1,9 @@
+fix rev(z). Lam. Lam. lam l. lam acc. caseL l of 
+   nil =>  acc
+ | h::tl => rev () [] [] tl (h :: acc)
+
+<= [max, 0] : unit  [max, 0]->  
+forall i [max, 0] :: size. 
+forall j [max, 0] :: size. 
+(list [i] bool) [max,0] -> (list [j] bool) [max, 3 * i] -> list[i+j] bool
+

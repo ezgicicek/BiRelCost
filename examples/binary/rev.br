@@ -1,0 +1,12 @@
+fix rev(z). Lam. Lam. Lam. Lam. lam l. lam acc. caseL l of 
+   nil =>  acc
+ | h::tl => rev () [] [] [] [] tl (h :: acc),
+
+fix rev(z). Lam. Lam.  Lam. Lam. lam l. lam acc. caseL l of 
+   nil =>  acc
+ | h::tl => rev () [] [] [] [] tl (h :: acc)
+
+<= 0 : unitR  =>  
+forall i; alpha; j; beta. 
+(list [i, alpha] U bool) => (list [j, beta] U bool) => list[i+j, alpha+beta] U bool
+

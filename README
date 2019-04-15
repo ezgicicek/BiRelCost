@@ -1,0 +1,23 @@
+BiRelCost : Bidirectional Type Analysis for Relational Costs
+------------------------------------------------------------- 
+
+This repository implements a bidirectional type checker for a
+refinement type and effect system.
+
+See INSTALL for directions for compiling and running BiRelCost and its test framework.
+
+See NOTES for detailed notes on notation, troubleshooting and misc.
+
+What is where?
+-----------------------------
+- all the OCaml source is in src/
+  * birel.ml [Main file]
+  * tycheck.ml [Core typechecking functor]
+  * binary.ml  [Binary typechecking engine]
+  * unary.ml   [Unary typechecking engine]
+  * test.ml    [Test framework]
+- example programs are in examples/
+
+- why theory file, containing all the necessary lemmas for Why3, is
+  'birel.why'
+

@@ -1,0 +1,18 @@
+let find = {contra : 
+ (U (int -> forall n [max, 0] :: size.
+(list [n] int)  [max,  4 * n] -> int, 
+int [min,0]-> forall n [min, 0] :: size.
+(list [n] int) [min,  4 * n] -> int)), 0}
+in
+let add = {contra: (U ((int X int) -> int, (int X int) [min,0]-> int)), 0} in
+let pred = {contra: forall n. (list[n, 0] U int) => boolR, 0 } in
+
+fix Dcount (z). lam x. Lam. Lam. lam M.
+caseL M of 
+nil => 0
+| l :: M' => let r = Dcount () x [] [] M' in
+       	     if (pred [] l) then add (r, find x [] l) else r
+
+<= 0 :
+unitR => intR => forall i; j.
+(list [i, 0] (list[j, 0] U int)) => U int

@@ -1,0 +1,47 @@
+- Differences from RelCost 
+
+  * RelCost's unary typing is divided into two modes: max mode only
+    tracks upper bounds whereas min mode only tracks lower bounds.
+
+  * We adopt the generalized unrelated type U(A1,A1) as in RelCost's
+    appendix.
+
+- General notes on running BiRelCost:
+  * take a look at command line arguments by running
+    $ ./birel --help
+
+    Note that for bfold and msort, you have to use the command line
+    argument (-NC) that activates a heuristic for subtyping boxed
+    function types to their unboxed versions.
+
+  * Existential elimination may run for a long time. Therefore, if you
+    program does not typecheck within the given time bounds, try
+    experimenting with the following commmand line arguments:
+
+    -- '-t' : timelimit per subgoal
+    -- 'i'  : number of iterations per existential substitutions
+    -- '-S' : split-on-goal which splits the goal into subgoals and tries solving each subgoal
+
+- Notational remarks
+  * Top-level expressions
+    e1, e2 <= t : τ 
+    e <= t : τ is shortcut for e,e <= t:τ
+
+  * contra is a syntactic marker that is trivially typechecked. It is
+    mainly used for a) primitives and b) debugging.
+
+  * Syntactic sugar:
+    '=>' stands for [diff,0] 
+    '->' stands for [max, 0]  
+    'forall i.' stands for 'forall i [diff,0] ::size.'
+    'forall i;j' stands for 'forall i [diff,0] ::size. forall j [diff,0] ::size.'
+
+- Troubleshooting
+  Possible problems:
+  * 'Unbound module Why3': make sure you run make install lib in why3 directory
+  * 'Fatal error: exception Loc.Located(_, _)' :  'birel.why' theory file is wrong.
+     This error arises if you changes 'birel.why'. 
+     To debug: make sure it works by proving the lemmas:
+     $ why3 prove -P alt-ergo birel.why
+
+   * Feel free to contact me at 'ecicek@mpi-sws.org'.

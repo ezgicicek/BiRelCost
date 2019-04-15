@@ -1,0 +1,9 @@
+fix find(x). lam eq. Lam. lam l. caseL l of 
+   nil =>  0
+ | h::tl => if (eq (find x eq [] tl, 1)) then 1 else (if (eq (h,x)) then 1 else 0)
+
+<= [min,0] : 
+
+int [min,0]-> ((int X int) [min,1]-> bool) [min,0]-> forall n [min, 0] :: size.
+(list [n] int) [min,  5 * n ] -> int
+

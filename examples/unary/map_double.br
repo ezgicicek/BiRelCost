@@ -1,0 +1,8 @@
+fix map(z). Lam. lam f. lam l. caseL l of 
+   nil =>  nil
+ | h::tl => caseL tl of 
+   	      nil => f h :: nil 
+	    | h'::tl' => f h :: f h' :: map () [] f tl'
+
+<= [max, 0] : unit  [max, 0]->  forall i [max, 0] :: size.  (bool [max, 2] -> bool) [max,0] -> (list [i] bool) [max, 8 * i] -> list[i] bool
+

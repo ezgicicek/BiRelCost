@@ -1,0 +1,22 @@
+let bsplit = 
+{contra : B(unitR =>  
+forall i; alpha. 
+(list [i, alpha] U int) => exists beta :: size. { beta <= alpha }
+ (list[cl(i / 2), beta] U int) X (list [fl(i / 2), alpha-beta] U int)), 0} in
+
+fix bfold(z). lam f. Lam. Lam. lam l. caseL l of 
+   nil   => 0
+ | h::tl => caseL tl of 
+   	    nil     => h
+	  | h'::tl' => let r = bsplit () [] [] l in
+	    	       unpack r as y in
+		       clet y as x in
+		       let r1 = (bfold () f [] [] (fst x)) in
+		       let r2 = (bfold () f [] [] (snd x)) in
+	  	       f (r1, r2)
+
+<= 0 : 
+B (unitR => (B (U ((int X int) [max,2]-> int, (int X int) [min,1]-> int))) =>
+forall n; alpha.
+(list [n, alpha] U int) [diff, sum(minpowcon (alpha, n), {0, cl(log (n))})] -> U int
+)

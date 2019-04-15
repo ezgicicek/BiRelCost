@@ -1,0 +1,16 @@
+let eq = {lam x. if (fst x) then (if (snd x) then true else false)
+       	     	else (if (snd x) then false else true) : ((U bool) X (U bool)) => U bool, 0} in
+let boolAnd = {lam x. if (fst x) then (if (snd x) then true else false)
+       	     	else (if (snd x) then false else false) : ((U bool) X (U bool)) => U bool, 0} in
+
+
+fix comp (z). Lam. Lam. Lam. lam x. lam y.
+caseL x of
+   nil     => true
+|  h :: tl => caseL y of
+     	     nil       => contra
+	   | h' :: tl'   =>  boolAnd ((comp () [] [] [] tl tl'), eq (h, h'))
+
+<= 0 : unitR  =>  
+forall i; alpha; beta. (list [i, alpha] U bool) => (list [i, beta] U bool) =>  U bool
+
